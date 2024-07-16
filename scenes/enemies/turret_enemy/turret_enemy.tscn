@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://b46jj06n6blsr"]
+
+[ext_resource type="PackedScene" uid="uid://bt8fiwi521vdg" path="res://scenes/enemies/base_enemy/BaseEnemy.tscn" id="1_w2m6i"]
+[ext_resource type="Script" path="res://scenes/enemies/turret_enemy/turret_enemy.gd" id="2_1ct3c"]
+[ext_resource type="PackedScene" uid="uid://bsur3dtn6xb0o" path="res://scenes/attacks/attack_components/ranged_attack_component.tscn" id="2_nec56"]
+[ext_resource type="Texture2D" uid="uid://cqva7hmx7o74i" path="res://assets/custom/enemies/turret_02_mk1.png" id="3_8idcs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kiybc"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c042w"]
+atlas = ExtResource("3_8idcs")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbjkp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c042w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dacpt"]
+size = Vector2(40, 20)
+
+[node name="TurretEnemy" instance=ExtResource("1_w2m6i")]
+script = ExtResource("2_1ct3c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(-3, 3)
+shape = SubResource("CircleShape2D_kiybc")
+
+[node name="Line2D" type="Line2D" parent="." index="2"]
+width = 1.0
+
+[node name="RangedAttack" parent="." index="3" instance=ExtResource("2_nec56")]
+speed = 100.0
+life_span = 20.0
+attack_key = 0
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_vbjkp")
+animation = &"idle"
+
+[node name="PlayerDetector" type="RayCast2D" parent="." index="5"]
+target_position = Vector2(200, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_dacpt")
+
+[node name="AttackTimer" type="Timer" parent="." index="7"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

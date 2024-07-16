@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt8fiwi521vdg"]
+
+[ext_resource type="Script" path="res://scenes/enemies/base_enemy/BaseEnemy.gd" id="1_ngv3f"]
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_ngv3f")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

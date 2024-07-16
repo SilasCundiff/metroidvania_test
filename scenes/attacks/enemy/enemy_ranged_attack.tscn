@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1fknpxsgc0yu"]
+
+[ext_resource type="PackedScene" uid="uid://p6pw0d3mnedk" path="res://scenes/attacks/base_attack/base_attack.tscn" id="1_hmvfg"]
+[ext_resource type="Texture2D" uid="uid://cvpks3ybb33vt" path="res://assets/items/bullet2.png" id="2_soaiu"]
+
+[node name="EnemyRangedAttack" instance=ExtResource("1_hmvfg")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_soaiu")

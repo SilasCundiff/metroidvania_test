@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://b46jj06n6blsr"]
+
+[ext_resource type="PackedScene" uid="uid://bt8fiwi521vdg" path="res://scenes/enemies/base_enemy/BaseEnemy.tscn" id="1_w2m6i"]
+[ext_resource type="Script" path="res://scenes/enemies/turret_enemy/turret_enemy.gd" id="2_1ct3c"]
+[ext_resource type="PackedScene" uid="uid://bsur3dtn6xb0o" path="res://scenes/attacks/attack_components/ranged_attack_component.tscn" id="2_nec56"]
+[ext_resource type="Texture2D" uid="uid://3v5s1bva7bc5" path="res://icon.png" id="3_qb45w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kiybc"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxxl0"]
+atlas = ExtResource("3_qb45w")
+region = Rect2(0, 0, 18, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbjkp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxxl0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ceney"]
+radius = 9.0
+
+[node name="TurretEnemy" instance=ExtResource("1_w2m6i")]
+script = ExtResource("2_1ct3c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(-3, 3)
+shape = SubResource("CircleShape2D_kiybc")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_vbjkp")
+animation = &"idle"
+
+[node name="PlayerDetector" type="RayCast2D" parent="." index="3"]
+target_position = Vector2(200, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+visible = false
+position = Vector2(-1, 4)
+shape = SubResource("CircleShape2D_ceney")
+
+[node name="RangedAttack" parent="." index="5" instance=ExtResource("2_nec56")]
+life_span = 20.0
+
+[node name="AttackTimer" type="Timer" parent="." index="6"]
+wait_time = 2.0
+one_shot = true

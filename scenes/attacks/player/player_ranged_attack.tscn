@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://plkyncgfcbpx"]
+
+[ext_resource type="Script" path="res://scenes/attacks/player/player_ranged_attack.gd" id="1_a5biq"]
+[ext_resource type="Texture2D" uid="uid://wt6t3c5akr3c" path="res://assets/custom/player/Attack-02.png" id="2_0r8hb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjkar"]
+atlas = ExtResource("2_0r8hb")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mtx6"]
+atlas = ExtResource("2_0r8hb")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxgxk"]
+atlas = ExtResource("2_0r8hb")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hwq4s"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_cjkar")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_2mtx6")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_jxgxk")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_2mtx6")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_jxgxk")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_2mtx6")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_cjkar")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 60.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3l636"]
+radius = 19.0263
+
+[node name="PlayerRangedAttack" type="Area2D"]
+scale = Vector2(0.75, 0.75)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_a5biq")
+
+[node name="AttackSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(17, 0)
+sprite_frames = SubResource("SpriteFrames_hwq4s")
+animation = &"Attack"
+frame = 2
+frame_progress = 0.368243
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_3l636")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

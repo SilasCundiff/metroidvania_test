@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc7uen4680qug"]
+
+[ext_resource type="Script" path="res://scenes/attacks/player/player_melee_attack.gd" id="1_mmyie"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jf46"]
+radius = 24.0208
+
+[node name="PlayerMeleeAttack" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_mmyie")
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1jf46")
+debug_color = Color(1, 0.0117647, 0.00784314, 0.419608)
+
+[node name="SwingTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="SwingTimer" to="." method="_on_swing_timer_timeout"]

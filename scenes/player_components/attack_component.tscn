@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvb76grjufsb6"]
+
+[ext_resource type="Script" path="res://scenes/player_components/attack_component.gd" id="1_fmwib"]
+[ext_resource type="PackedScene" uid="uid://bsur3dtn6xb0o" path="res://scenes/attacks/attack_components/ranged_attack_component.tscn" id="2_1lhyd"]
+[ext_resource type="PackedScene" uid="uid://diveel0duipmo" path="res://scenes/attacks/attack_components/melee_attack_component.tscn" id="3_f67xb"]
+
+[node name="AttackComponent" type="Node"]
+script = ExtResource("1_fmwib")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="RangedAttack" parent="." instance=ExtResource("2_1lhyd")]
+
+[node name="MeleeAttack" parent="." instance=ExtResource("3_f67xb")]
+position = Vector2(8, 2)
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

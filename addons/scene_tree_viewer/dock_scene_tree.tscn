@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://dosmd3lmo8v5q"]
+
+[ext_resource type="Script" path="res://addons/scene_tree_viewer/dock_scene_tree.gd" id="1_o1h4h"]
+[ext_resource type="PackedScene" uid="uid://cw17j5nwqxtvs" path="res://addons/scene_tree_viewer/toolbar.tscn" id="2_0ywdo"]
+
+[node name="SceneDock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o1h4h")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Toolbar" parent="MainVBox" instance=ExtResource("2_0ywdo")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="MainVBox/MarginContainer"]
+layout_mode = 2
+
+[connection signal="on_addons_visibility_changed" from="MainVBox/Toolbar" to="." method="_on_addons_visibility_changed"]
+[connection signal="on_pathname_visibility_changed" from="MainVBox/Toolbar" to="." method="_on_pathname_visibility_changed"]

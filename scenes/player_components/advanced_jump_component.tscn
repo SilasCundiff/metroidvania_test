@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqkyyxsii6xcu"]
+
+[ext_resource type="Script" path="res://scenes/player_components/advanced_jump_component.gd" id="1_aa5gc"]
+
+[node name="AdvancedJumpComponent" type="Node"]
+script = ExtResource("1_aa5gc")
+
+[node name="JumpBuffer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+one_shot = true
