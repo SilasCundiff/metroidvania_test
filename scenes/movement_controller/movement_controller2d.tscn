@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcktsfcyld5xp"]
+
+[ext_resource type="Script" path="res://scenes/movement_controller/movement_controller2d.gd" id="1_al4df"]
+[ext_resource type="Script" path="res://scenes/movement_controller/input_component_2d.gd" id="2_58sll"]
+[ext_resource type="Script" path="res://scenes/movement_controller/movement_component_2d.gd" id="3_p71hk"]
+
+[node name="MovementController2D" type="Node2D"]
+script = ExtResource("1_al4df")
+
+[node name="DashRefreshTimer" type="Timer" parent="."]
+
+[node name="DashTimer" type="Timer" parent="."]
+
+[node name="WallJumpControlTimer" type="Timer" parent="."]
+
+[node name="WallSlideTimer" type="Timer" parent="."]
+
+[node name="InputComponent2D" type="Node" parent="."]
+script = ExtResource("2_58sll")
+
+[node name="MovementComponent2D" type="Node" parent="."]
+script = ExtResource("3_p71hk")

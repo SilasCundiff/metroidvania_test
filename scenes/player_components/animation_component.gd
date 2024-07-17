@@ -5,19 +5,19 @@ extends Node
 @export var sprite: AnimatedSprite2D
 
 
-func handle_horizontal_flip(move_direction: float, player_sprite: AnimatedSprite2D) -> void:
-	if move_direction == 0:
+func handle_horizontal_flip(move_direction: Vector2, player_sprite: AnimatedSprite2D) -> void:
+	if move_direction.x == 0:
 		return
 	
-	player_sprite.flip_h = false if move_direction > 0 else true
+	player_sprite.flip_h = false if move_direction.x > 0 else true
 
 
-func handle_move_animation(move_direction: float, player: Player, player_sprite: AnimatedSprite2D) -> void:
+func handle_move_animation(move_direction: Vector2, player: Player, player_sprite: AnimatedSprite2D) -> void:
 	handle_horizontal_flip(move_direction, player_sprite)
 	
-	if move_direction != 0 and player._state == player.PLAYER_STATE.RUNNING and (player._state != player.PLAYER_STATE.MELEE_ATTACK or player._state != player.player.PLAYER_STATE.RANGED_ATTACK or player._state != player.PLAYER_STATE.DEFLECT_ATTACK):
+	if move_direction.x != 0 and player._state == player.PLAYER_STATE.RUNNING and (player._state != player.PLAYER_STATE.MELEE_ATTACK or player._state != player.player.PLAYER_STATE.RANGED_ATTACK or player._state != player.PLAYER_STATE.DEFLECT_ATTACK):
 		player_sprite.play("run")
-	elif move_direction == 0 and player._state == player.PLAYER_STATE.IDLE and (player._state != player.PLAYER_STATE.MELEE_ATTACK or player._state != player.PLAYER_STATE.RANGED_ATTACK or player._state != player.PLAYER_STATE.DEFLECT_ATTACK):
+	elif move_direction.x == 0 and player._state == player.PLAYER_STATE.IDLE and (player._state != player.PLAYER_STATE.MELEE_ATTACK or player._state != player.PLAYER_STATE.RANGED_ATTACK or player._state != player.PLAYER_STATE.DEFLECT_ATTACK):
 		player_sprite.play("idle")
 
 

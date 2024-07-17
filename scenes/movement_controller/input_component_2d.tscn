@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbpu1p2154ffn"]
+
+[ext_resource type="Script" path="res://scenes/movement_controller/input_component_2d.gd" id="1_se63q"]
+
+[node name="InputComponent2D" type="Node"]
+script = ExtResource("1_se63q")

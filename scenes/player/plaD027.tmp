@@ -1,14 +1,18 @@
-[gd_scene load_steps=64 format=3 uid="uid://djlmwar4vcb8e"]
+[gd_scene load_steps=68 format=3 uid="uid://djlmwar4vcb8e"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_p5n75"]
 [ext_resource type="Texture2D" uid="uid://bkuwa5x8rqdlp" path="res://assets/custom/player/Jump-All-Sheet.png" id="3_4ol03"]
 [ext_resource type="Texture2D" uid="uid://b7nmyxpumssau" path="res://assets/custom/player/Attack-01-Sheet.png" id="3_qpdqb"]
+[ext_resource type="PackedScene" uid="uid://c200idtq385to" path="res://scenes/player_components/gravity_component.tscn" id="6_tujpv"]
+[ext_resource type="PackedScene" uid="uid://cqkyyxsii6xcu" path="res://scenes/player_components/advanced_jump_component.tscn" id="7_7i3k5"]
 [ext_resource type="PackedScene" uid="uid://cvb76grjufsb6" path="res://scenes/player_components/attack_component.tscn" id="8_502pr"]
 [ext_resource type="Texture2D" uid="uid://ptmhj3rk1t8x" path="res://assets/custom/player/full_sheet.png" id="8_bfwbg"]
+[ext_resource type="PackedScene" uid="uid://dfgj8365q4a43" path="res://scenes/player_components/movement_component.tscn" id="8_e2jgf"]
 [ext_resource type="PackedScene" uid="uid://ch6ysaoagoouw" path="res://scenes/player_components/animation_component.tscn" id="9_y2gby"]
 [ext_resource type="PackedScene" uid="uid://btaxc061edjwc" path="res://scenes/player_components/player_hitbox_component.tscn" id="10_i3c5x"]
 [ext_resource type="PackedScene" uid="uid://0cec4xnkdnx8" path="res://scenes/player_components/input_component.tscn" id="10_kaxlg"]
 [ext_resource type="PackedScene" uid="uid://dc7uen4680qug" path="res://scenes/attacks/player/player_melee_attack.tscn" id="12_425xa"]
+[ext_resource type="Texture2D" uid="uid://3v5s1bva7bc5" path="res://icon.png" id="13_diovp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_shdyt"]
 atlas = ExtResource("8_bfwbg")
@@ -448,6 +452,7 @@ collision_layer = 0
 script = ExtResource("1_p5n75")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_t5hy6")
 animation = &"attack"
 frame = 4
@@ -475,12 +480,24 @@ libraries = {
 "": SubResource("AnimationLibrary_nquj0")
 }
 
+[node name="AdvancedJumpComponent" parent="." instance=ExtResource("7_7i3k5")]
+jump_velocity = -350.0
+
 [node name="AnimationComponent" parent="." instance=ExtResource("9_y2gby")]
 
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("melee_attack") instance=ExtResource("8_502pr")]
 melee_attack = NodePath("../PlayerMeleeAttack")
 
+[node name="GravityComponent" parent="." instance=ExtResource("6_tujpv")]
+
 [node name="InputComponent" parent="." instance=ExtResource("10_kaxlg")]
+
+[node name="MovementComponent" parent="." instance=ExtResource("8_e2jgf")]
 
 [node name="PlayerMeleeAttack" parent="." instance=ExtResource("12_425xa")]
 position = Vector2(10, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1.43051e-06)
+scale = Vector2(1, 2.18182)
+texture = ExtResource("13_diovp")

@@ -1,4 +1,4 @@
-class_name MovementComponent
+class_name MovementComponent2D
 extends Node
 
 @export_subgroup("Settings")
