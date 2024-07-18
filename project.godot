@@ -21,6 +21,7 @@ SignalManager="*res://singletons/signal_manager.gd"
 SoundManager="*res://singletons/sound_manager.gd"
 GameManager="*res://singletons/game_manager.gd"
 ObjectMaker="*res://singletons/object_maker.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [debug]
 
@@ -31,11 +32,12 @@ gdscript/warnings/inferred_declaration=1
 
 window/size/viewport_width=1024
 window/size/viewport_height=600
+window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anim_player_refactor/plugin.cfg", "res://addons/globalize-plugins/plugin.cfg", "res://addons/nv.file_system/plugin.cfg", "res://addons/scene_tree_viewer/plugin.cfg")
+enabled=PackedStringArray("res://addons/anim_player_refactor/plugin.cfg", "res://addons/globalize-plugins/plugin.cfg", "res://addons/nv.file_system/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/scene_tree_viewer/plugin.cfg")
 
 [input]
 
@@ -111,3 +113,4 @@ dash={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+2d/snap/snap_2d_transforms_to_pixel=true

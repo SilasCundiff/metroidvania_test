@@ -330,6 +330,9 @@ func update_current_direction() -> void:
 	if current_direction == Vector2.ZERO:
 		current_direction = Vector2(1, 0) # Default to right
 
+func get_direction() -> Vector2:
+	return current_direction
+
 ## Handles input for dashing
 func handle_dash_input() -> void:
 	if can_dash and Input.is_action_just_pressed("dash"):
