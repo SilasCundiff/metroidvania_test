@@ -446,6 +446,14 @@ _data = {
 scale = Vector2(0.5, 0.5)
 collision_layer = 0
 script = ExtResource("1_p5n75")
+SPEED = 200.0
+GRAVITY = 1200.0
+FALL_GRAVITY = 1600.0
+JUMP_VELOCITY = -400.0
+WALL_JUMP_VELOCITY = -300.0
+MAX_JUMP_CHARGES = 2
+DASH_SPEED = 400.0
+DASH_TIME = 0.15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_t5hy6")

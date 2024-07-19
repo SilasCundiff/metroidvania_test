@@ -75,6 +75,7 @@ shape = SubResource("CircleShape2D_0fnxk")
 
 [node name="RangedAttack" parent="." index="6" instance=ExtResource("4_7j3sy")]
 life_span = 20.0
+attack_key = 0
 
 [node name="AttackTimer" type="Timer" parent="." index="7"]
 wait_time = 2.0

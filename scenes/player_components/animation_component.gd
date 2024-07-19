@@ -8,8 +8,8 @@ extends Node
 func handle_horizontal_flip(move_direction: Vector2, player_sprite: AnimatedSprite2D) -> void:
 	if move_direction.x == 0:
 		return
-	
 	player_sprite.flip_h = false if move_direction.x > 0 else true
+
 
 
 func handle_move_animation(move_direction: Vector2, player: Player, player_sprite: AnimatedSprite2D) -> void:

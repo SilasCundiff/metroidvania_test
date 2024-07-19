@@ -35,8 +35,8 @@ enum PLAYER_STATE {
 @export var GROUND_ACCELERATION : float = 1200.0 # Acceleration on the ground
 @export var AIR_ACCELERATION : float = 600.0 # Base acceleration in the air
 @export var FRICTION : float = 1400.0 # Base friction
-@export var GRAVITY : float = 1800.0 # Gravity when moving upwards
-@export var FALL_GRAVITY : float = 2500.0 # Gravity when falling downwards
+@export var GRAVITY : float = 1600.0 # Gravity when moving upwards
+@export var FALL_GRAVITY : float = 2000.0 # Gravity when falling downwards
 @export var WALL_GRAVITY : float = 25.0 # Gravity while sliding on a wall
 @export var JUMP_VELOCITY : float = -500.0 # Maximum jump strength
 @export var WALL_JUMP_VELOCITY : float = -500.0 # Maximum wall jump strength
@@ -76,9 +76,15 @@ var _state: PLAYER_STATE = PLAYER_STATE.IDLE
 var first_load: bool = true
 var _movement_disabled: bool = false
 
+# Camera jitter fix
+
+var _physics_body_tran_last # Type: Transform2D/3D
+var _physics_body_tran_current # Type: Transform2D/3D
+
 
 
 func _ready() -> void:
+	player_sprite.top_level = true
 	SignalManager.on_attack_timer_finished.connect(on_attack_timer_finished)
 	SignalManager.on_invincible.connect(on_invincible)
 	SignalManager.on_hurt.connect(on_hurt)
@@ -88,9 +94,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	#gravity_component.handle_gravity(self, delta)
-	#movement_component.handle_horizontal_movement(self, input_component.get_input_direction(), delta)
-	#advanced_jump_component.handle_jump(self, input_component.get_jump_input(), input_component.get_jump_input_released())
+	_physics_body_tran_last = _physics_body_tran_current
+	_physics_body_tran_current = global_transform
+	
 	animation_component.handle_move_animation(input_component.get_input_direction(), self, player_sprite)
 	animation_component.handle_jump_animation(self, player_sprite)
 	update_current_direction()
@@ -106,7 +112,19 @@ func _physics_process(delta: float) -> void:
 	
 	update_debug_level()
 	calculate_states()
+	velocity.y = clampf(velocity.y, -2000.0, FALL_GRAVITY)
 	move_and_slide()
+
+
+func _process(_delta: float) -> void:
+	player_sprite.global_transform = \
+		_physics_body_tran_last.interpolate_with(
+			_physics_body_tran_current,
+			Engine.get_physics_interpolation_fraction()
+		)
+
+
+
 
 func update_debug_level() -> void:
 	debug_label.text = "On Floor: %s\nOn Wall: %s\nState: %s\nVelocity: %.2f, %.2f" % [
